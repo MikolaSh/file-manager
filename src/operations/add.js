@@ -1,7 +1,7 @@
 import fs from "fs";
 import { join } from "path";
 
-const add = async (currentDir, fileName) => {
+const add = async (currentDir, fileName, content = '') => {
 
   return new Promise((resolve, reject) => {
     const pathToFile = join(currentDir, fileName);
@@ -20,7 +20,7 @@ const add = async (currentDir, fileName) => {
       reject('Invalid Input');
     })
 
-    stream.write('');
+    stream.write(content);
     stream.end();
   })
 }

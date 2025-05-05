@@ -10,6 +10,7 @@ import add from "./operations/add.js";
 import mkdir from "./operations/mkdir.js";
 import rename from "./operations/rename.js";
 import deleteFile from "./operations/deleteFile.js";
+import copy from "./operations/copy.js";
 
 
 let currentDir = os.homedir();
@@ -49,20 +50,20 @@ const handleCommand = async (value) => {
   const [command, ...args] = value.toString().trim().split(' ');
 
   switch(command) {
-    case 'cd': 
+    case 'cd':
       try {
           currentDir = await cd(currentDir, args);
       } catch (error) {
           console.error(error);
       }
       break;
-    case 'up': 
+    case 'up':
       currentDir = up(currentDir);
       break;
-    case 'ls': 
+    case 'ls':
       await listFiles(currentDir);
       break;
-    case 'os': 
+    case 'os':
       systemInfo(args);
       break;
     case 'hash':
@@ -80,25 +81,30 @@ const handleCommand = async (value) => {
         console.log(err);
       }
       break;
-    case 'add': 
+    case 'add':
       await add(currentDir, args[0]).catch((err) => {
         console.log(err);
       })
       break;
-    case 'mkdir': 
+    case 'mkdir':
       await mkdir(currentDir, args[0]).catch((err) => {
         console.log(err);
       })
       break;
-    case 'rn': 
+    case 'rn':
       await rename(args[0], args[1]).catch((err) => {
         console.log(err);
       })
       break;
-    case 'rm': 
+    case 'rm':
       await deleteFile(args[0]).catch((err) => {
         console.log(err);
       })
+      break;
+    case 'cp':
+      await copy(args[0], args[1]).catch((err) => {
+        console.log(err);
+      });
       break;
     default:
       console.log('Invalid input');
