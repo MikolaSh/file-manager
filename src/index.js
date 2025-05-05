@@ -3,6 +3,7 @@ import os from "os";
 import listFiles from "./navigation/listFiles.js";
 import cd from "./navigation/cd.js";
 import up from "./navigation/up.js";
+import systemInfo from "./systemInfo/systemInfo.js";
 
 
 let currentDir = os.homedir();
@@ -22,7 +23,6 @@ const displayCurrentDirectory = () => {
 
 const handleCommand = async (value) => {
   const [command, ...args] = value.toString().trim().split(' ');
-  console.log(command);
 
   switch(command) {
     case 'cd': 
@@ -37,6 +37,9 @@ const handleCommand = async (value) => {
       break;
     case 'ls': 
       await listFiles(currentDir);
+      break;
+    case 'os': 
+      systemInfo(args);
       break;
     default:
       console.log('Invalid input');
