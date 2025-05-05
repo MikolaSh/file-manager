@@ -3,13 +3,15 @@ import fs from "fs";
 const cat = async (pathToFile) => {
   return new Promise((resolve, reject) => {
     const stream = fs.createReadStream(pathToFile);
+
+    let content;
   
     stream.on("data", (value) => {
-      console.log(value.toString())
+      content += value.toString();
     })
 
     stream.on("end", () => {
-      resolve();
+      resolve(content);
     })
 
     stream.on('error', () => {

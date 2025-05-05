@@ -72,10 +72,13 @@ const handleCommand = async (value) => {
         await clculateHash(pathToFile);
       }
       break;
-    case 'cat': 
-      await cat(args[0]).catch((err) => {
+    case 'cat':
+      try {
+        const result = await cat(args[0])
+        console.log(result);
+      } catch(err) {
         console.log(err);
-      })
+      }
       break;
     case 'add': 
       await add(currentDir, args[0]).catch((err) => {
