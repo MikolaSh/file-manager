@@ -8,6 +8,7 @@ import clculateHash from "./hash/clculateHash.js";
 import cat from "./operations/cat.js";
 import add from "./operations/add.js";
 import mkdir from "./operations/mkdir.js";
+import rename from "./operations/rename.js";
 
 
 let currentDir = os.homedir();
@@ -82,6 +83,11 @@ const handleCommand = async (value) => {
       break;
     case 'mkdir': 
       await mkdir(currentDir, args[0]).catch((err) => {
+        console.log(err);
+      })
+      break;
+    case 'rn': 
+      await rename(args[0], args[1]).catch((err) => {
         console.log(err);
       })
       break;
