@@ -5,6 +5,7 @@ import cd from "./navigation/cd.js";
 import up from "./navigation/up.js";
 import systemInfo from "./systemInfo/systemInfo.js";
 import clculateHash from "./hash/clculateHash.js";
+import cat from "./operations/cat.js";
 
 
 let currentDir = os.homedir();
@@ -66,6 +67,9 @@ const handleCommand = async (value) => {
       if(isCorrectFile) {
         await clculateHash(pathToFile);
       }
+      break;
+    case 'cat': 
+      await cat(args[0]);
       break;
     default:
       console.log('Invalid input');
