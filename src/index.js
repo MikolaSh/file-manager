@@ -1,12 +1,31 @@
-import fs from "fs";
+import fs, { stat } from "fs";
 import os from "os";
 import listFiles from "./navigation/listFiles.js";
 import cd from "./navigation/cd.js";
 import up from "./navigation/up.js";
 import systemInfo from "./systemInfo/systemInfo.js";
+import clculateHash from "./hash/clculateHash.js";
 
 
 let currentDir = os.homedir();
+
+const isFile = async (pathToFile) => {
+  return new Promise((resolve) => {
+      fs.stat(pathToFile, (err, stats) => {
+          if (err) {
+              return resolve('Invalid input');
+          }
+
+          if (stats.isFile()) {
+              return resolve(true);
+          }
+
+          if (stats.isDirectory()) {
+              return resolve(false);
+          }
+      });
+  });
+}
 
 const getUsername = (args) => {
   const usernameArg = args.find(arg => arg.startsWith('--username='));
@@ -40,6 +59,13 @@ const handleCommand = async (value) => {
       break;
     case 'os': 
       systemInfo(args);
+      break;
+    case 'hash':
+      const pathToFile = args[0];
+      const isCorrectFile = await isFile(args[0]);
+      if(isCorrectFile) {
+        await clculateHash(pathToFile);
+      }
       break;
     default:
       console.log('Invalid input');
