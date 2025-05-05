@@ -9,6 +9,7 @@ import cat from "./operations/cat.js";
 import add from "./operations/add.js";
 import mkdir from "./operations/mkdir.js";
 import rename from "./operations/rename.js";
+import deleteFile from "./operations/deleteFile.js";
 
 
 let currentDir = os.homedir();
@@ -88,6 +89,11 @@ const handleCommand = async (value) => {
       break;
     case 'rn': 
       await rename(args[0], args[1]).catch((err) => {
+        console.log(err);
+      })
+      break;
+    case 'rm': 
+      await deleteFile(args[0]).catch((err) => {
         console.log(err);
       })
       break;
