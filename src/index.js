@@ -1,4 +1,4 @@
-import fs, { stat } from "fs";
+import fs from "fs";
 import os from "os";
 import listFiles from "./navigation/listFiles.js";
 import cd from "./navigation/cd.js";
@@ -7,6 +7,7 @@ import systemInfo from "./systemInfo/systemInfo.js";
 import clculateHash from "./hash/clculateHash.js";
 import cat from "./operations/cat.js";
 import add from "./operations/add.js";
+import mkdir from "./operations/mkdir.js";
 
 
 let currentDir = os.homedir();
@@ -76,6 +77,11 @@ const handleCommand = async (value) => {
       break;
     case 'add': 
       await add(currentDir, args[0]).catch((err) => {
+        console.log(err);
+      })
+      break;
+    case 'mkdir': 
+      await mkdir(currentDir, args[0]).catch((err) => {
         console.log(err);
       })
       break;
