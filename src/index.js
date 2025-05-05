@@ -17,19 +17,17 @@ let currentDir = os.homedir();
 
 const isFile = async (pathToFile) => {
   return new Promise((resolve) => {
-      fs.stat(pathToFile, (err, stats) => {
-          if (err) {
-              return resolve('Invalid input');
-          }
-
-          if (stats.isFile()) {
-              return resolve(true);
-          }
-
-          if (stats.isDirectory()) {
-              return resolve(false);
-          }
-      });
+    fs.stat(pathToFile, (err, stats) => {
+      if (err) {
+          return resolve('Invalid input');
+      }
+      if (stats.isFile()) {
+          return resolve(true);
+      }
+      if (stats.isDirectory()) {
+          return resolve(false);
+      }
+    });
   });
 }
 
@@ -43,7 +41,7 @@ const getUsername = (args) => {
 }
 
 const displayCurrentDirectory = () => {
-    console.log(`You are currently in ${currentDir}`);
+  console.log(`You are currently in ${currentDir}`);
 }
 
 const handleCommand = async (value) => {
@@ -52,9 +50,9 @@ const handleCommand = async (value) => {
   switch(command) {
     case 'cd':
       try {
-          currentDir = await cd(currentDir, args);
+        currentDir = await cd(currentDir, args);
       } catch (error) {
-          console.error(error);
+        console.error(error);
       }
       break;
     case 'up':

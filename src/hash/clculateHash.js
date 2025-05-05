@@ -9,8 +9,8 @@ const clculateHash = async (pathToFile) => {
   
   stream.pipe(hash);
   stream.on('end', () => {
-      hash.end();
-      console.log(`sha256 hash: ${hash.read()}`);
+    hash.end();
+    console.log(`sha256 hash: ${hash.read()}`);
   });
 }
 
