@@ -6,6 +6,7 @@ import up from "./navigation/up.js";
 import systemInfo from "./systemInfo/systemInfo.js";
 import clculateHash from "./hash/clculateHash.js";
 import cat from "./operations/cat.js";
+import add from "./operations/add.js";
 
 
 let currentDir = os.homedir();
@@ -69,7 +70,14 @@ const handleCommand = async (value) => {
       }
       break;
     case 'cat': 
-      await cat(args[0]);
+      await cat(args[0]).catch((err) => {
+        console.log(err);
+      })
+      break;
+    case 'add': 
+      await add(currentDir, args[0]).catch((err) => {
+        console.log(err);
+      })
       break;
     default:
       console.log('Invalid input');

@@ -12,8 +12,8 @@ const cat = async (pathToFile) => {
       resolve();
     })
 
-    stream.on('error', (err) => {
-      reject(err)
+    stream.on('error', () => {
+      reject('Invalid input')
     })
 
   })
